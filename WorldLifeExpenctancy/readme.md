@@ -9,11 +9,11 @@ I also looked at countries statuses and determined that there were no countries 
 
 One last thing to mention is that I pulled BMI category data and was able to label average BMI values with their corresponding BMI descriptor (underweight, healthy, overweight, obesity, sever obesity) to deterind if lifespan had any correlation with BMI across the world. Assuming BMI ranges are the same in all countries, the data isn't what I would expect. This shows that severely obese BMI ratings are falling into the higher than average lifespan range. There is no direct and obvious correlation that I'm seeing, but underwight BMIs seem to fall into the lower end of the lifespan range and obese fall into the higher range of lifespan averages.
 
-## Project Includes
+### Project Includes
 - Data Cleaning
 - Exploratory Data Analysis
 
-## Skills Presented
+### Skills Presented
 - Lead & Lag Functions
 - Aggregate Functions
 - Window Functions
