@@ -1,5 +1,5 @@
 SELECT * FROM heartdisease.heart_statlog;
--- dupliacet table so edits aren't made to original data
+-- duplicate table so edits aren't made to original data
 
 CREATE TABLE heartdisease.heart_statlog_work
 LIKE heartdisease.heart_statlog;
@@ -52,23 +52,7 @@ WHEN `chest pain type` = 2 THEN 'atypical angina'
 WHEN `chest pain type` = 3 THEN 'non-anginal pain'
 WHEN `chest pain type` = 4 THEN 'asymptomatic'
 END);
-/*
-UPDATE heartdisease.heart_statlog_work
-SET chest_pain_type = 'typical angina'
-WHERE `chest pain type` = 1;
 
-UPDATE heartdisease.heart_statlog_work
-SET chest_pain_type = 'atypical angina'
-WHERE `chest pain type` = 2;
-
-UPDATE heartdisease.heart_statlog_work
-SET chest_pain_type = 'non-anginal pain'
-WHERE `chest pain type` = 3;
-
-UPDATE heartdisease.heart_statlog_work
-SET chest_pain_type = 'asymptomatic'
-WHERE `chest pain type` = 4;
-*/
 -- delete original column
 ALTER TABLE heartdisease.heart_statlog_work
 DROP COLUMN `chest pain type`;
@@ -80,6 +64,7 @@ ADD COLUMN fasting_blood_sugar varchar(50)
 AFTER `fasting blood sugar`;
 
 SELECT * FROM heartdisease.heart_statlog_work;
+
 -- add data
 UPDATE heartdisease.heart_statlog_work
 SET fasting_blood_sugar =
@@ -88,15 +73,6 @@ WHEN `fasting blood sugar` = 0 THEN 'Less Than 120 mg/dl'
 WHEN `fasting blood sugar` = 1 THEN 'Greater Than 120 mg/dl'
 END);
 
-/*
-UPDATE heartdisease.heart_statlog_work
-SET fasting_blood_sugar = 'Less Than 120 mg/dl'
-WHERE `fasting blood sugar` = 0;
-
-UPDATE heartdisease.heart_statlog_work
-SET fasting_blood_sugar = 'Greater Than 120 mg/dl'
-WHERE `fasting blood sugar` = 1;
-*/
 SELECT * FROM heartdisease.heart_statlog_work;
 
 -- delete original column
@@ -118,19 +94,6 @@ WHEN `resting ecg` = 1 THEN 'ST-T wave abnormality'
 WHEN `resting ecg` = 2 THEN 'left ventricular hypertrophy'
 END);
 
-/*
-UPDATE heartdisease.heart_statlog_work
-SET resting_ecg = 'normal'
-WHERE `resting ecg` = 0;
-
-UPDATE heartdisease.heart_statlog_work
-SET resting_ecg = 'ST-T wave abnormality'
-WHERE `resting ecg` = 1;
-
-UPDATE heartdisease.heart_statlog_work
-SET resting_ecg = 'left ventricular hypertrophy'
-WHERE `resting ecg` = 2;
-*/
 SELECT * FROM heartdisease.heart_statlog_work;
 
 -- delete original column
@@ -150,15 +113,6 @@ WHEN `exercise angina` = 0 THEN 'no'
 WHEN `exercise angina` = 1 THEN 'yes'
 END);
 
-/*
-UPDATE heartdisease.heart_statlog_work
-SET exercise_induced_angina = 'no'
-WHERE `exercise angina` = 0;
-
-UPDATE heartdisease.heart_statlog_work
-SET exercise_induced_angina = 'yes'
-WHERE `exercise angina` = 1;
-*/
 SELECT * FROM heartdisease.heart_statlog_work;
 
 -- delete original column
@@ -182,15 +136,6 @@ WHEN `target` = 0 THEN 'normal'
 WHEN `target` = 1 THEN 'heart disease'
 END);
 
-/*
-UPDATE heartdisease.heart_statlog_work
-SET `status` = 'normal'
-WHERE `target` = 0;
-
-UPDATE heartdisease.heart_statlog_work
-SET `status` = 'heart disease'
-WHERE `target` = 1;
-*/
 SELECT * FROM heartdisease.heart_statlog_work;
 
 -- delete original column
