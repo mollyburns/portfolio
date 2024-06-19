@@ -8,12 +8,12 @@ This dataset also included information on the amount of land and water in each c
 An interesting takeaway was that the states that reported low mean incomes (the bottom 5) also reported median incomes that were close to the mean, but the states that reported the highest mean incomes (top 5) reported median incomes that weere significantly higher than the mean. This shows that the higher the mean income by state, there is a much larger range of incomes, with most households making higher than the mean incomes. 
 
 
-## Project Includes
+### Project Includes
 - Data Cleaning
 - Exploratory Data Analysis
 
 
-## Skills Presented
+### Skills Presented
 - Aggregate Functions
 - Window Functions
 - Mathematical Equations
