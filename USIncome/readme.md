@@ -14,7 +14,6 @@ An interesting takeaway was that the states that reported low mean incomes (the 
 
 
 ## Skills Presented
-- Skills
 - Aggregate Functions
 - Window Functions
 - Mathematical Equations
