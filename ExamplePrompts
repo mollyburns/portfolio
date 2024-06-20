@@ -1,0 +1,56 @@
+/*Recently there has been low morale at Bad Business Entertainment and people have been quitting. In an act of desperation that want to find the lowest paid employee in each department of the company and give each of those employees a 15% raise. Please provide the output of their ID, department, old salary, and new salary to hand off to Accounting. Output should be ordered from highest new salary to lowest new salary. Use a CTE to answer this question.*/
+
+WITH ITraisegroup AS
+  (
+  SELECT * FROM employee_raise
+  WHERE department = 'IT'
+  ORDER BY salary asc
+  LIMIT 1
+),
+SALESraisegroup AS
+(
+  SELECT * FROM employee_raise
+  WHERE department = 'Sales'
+  ORDER BY salary asc
+  LIMIT 1
+),
+ACCTraisegroup AS
+(
+  SELECT * FROM employee_raise
+  WHERE department = 'Accounting'
+  ORDER BY salary asc
+  LIMIT 1
+)
+
+  SELECT employee_id, department, salary oldsalary, salary*1.15 newsalary
+  FROM ITraisegroup
+  
+UNION 
+  
+  SELECT employee_id, department, salary oldsalary, salary*1.15 newsalary
+  FROM SALESraisegroup
+  
+UNION
+  
+  SELECT  employee_id, department, salary oldsalary, salary*1.15 newsalary
+  FROM ACCTraisegroup
+  ORDER BY newsalary DESC;
+
+
+/* Suppose you have a table named "Hierarchy" that contains information about the hierarchy of employees in a company. Each row represents a relationship between a supervisor and a subordinate employee, where the "Supervisor_ID" column indicates the ID of the supervisor and the "Employee_ID" column indicates the ID of the subordinate. The top-level supervisor(s) in the hierarchy won't have anything in the "Supervisor_ID" column. They should be level "1". While each subsequent level will be 1 higher. Write a query that returns the employee_id and their level (numeric) for each employee. Order on employee_id from lowest to highest. */
+
+WITH RECURSIVE Hierarchy AS
+(SELECT employee_id,supervisor_id, 1 AS level
+  FROM employee_hierarchy
+  WHERE supervisor_id IS NULL
+
+  UNION ALL
+  
+  SELECT eh.employee_ID,eh.supervisor_id, level + 1
+  FROM employee_hierarchy eh, Hierarchy h
+  WHERE eh.supervisor_id = h.employee_id
+)
+
+SELECT employee_ID, level 
+  from Hierarchy
+  ORDER BY employee_ID ASC;
