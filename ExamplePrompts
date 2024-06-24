@@ -76,3 +76,29 @@ SELECT b1.employee_name, b2.employee_name boss_name
 SELECT customer_id, number_of_orders
   FROM orders
   HAVING number_of_orders = (SELECT max(number_of_orders) FROM orders);
+
+
+
+
+/* A company is about to launch a new product and wants to estimate how many current customers will buy their new product. To do this, they want to identify all of the past customers who have bought all of their products. They currently only have 4 products. Write a query to identify customer_IDs that have bought all of their current products. Note: If a customer buys many of the same product that still only counts as buying one of their products. */
+
+SELECT p1.customer_id
+  FROM purchases p1
+  JOIN purchases p2 ON p1.customer_id = p2.customer_id
+  JOIN purchases p3 ON p1.customer_id = p3.customer_id
+  JOIN purchases p4 ON p1.customer_id = p4.customer_id
+  WHERE p1.product_id = 1
+  AND p2.product_id = 3
+  AND p3.product_id = 2
+  AND p4.product_id = 4
+  GROUP BY customer_id
+
+
+
+
+/* There's recently been an error on our server where some emails were duplicated. We need to identify those emails so we can remove the duplicates. Write a query to report all the duplicate emails and how many times they are in the database. Output should be in alphabetical order. */
+
+SELECT email, count(email) count
+FROM emails
+  GROUP BY email
+  HAVING count(email) >=2;
