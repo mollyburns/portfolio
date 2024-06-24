@@ -37,6 +37,8 @@ UNION
   ORDER BY newsalary DESC;
 
 
+
+
 /* Suppose you have a table named "Hierarchy" that contains information about the hierarchy of employees in a company. Each row represents a relationship between a supervisor and a subordinate employee, where the "Supervisor_ID" column indicates the ID of the supervisor and the "Employee_ID" column indicates the ID of the subordinate. The top-level supervisor(s) in the hierarchy won't have anything in the "Supervisor_ID" column. They should be level "1". While each subsequent level will be 1 higher. Write a query that returns the employee_id and their level (numeric) for each employee. Order on employee_id from lowest to highest. */
 
 WITH RECURSIVE Hierarchy AS
@@ -54,3 +56,23 @@ WITH RECURSIVE Hierarchy AS
 SELECT employee_ID, level 
   from Hierarchy
   ORDER BY employee_ID ASC;
+
+
+
+
+/* My Boss wants a report that shows each employee and their bosses name so he can try to memorize it before our quarterly social event. Provide an output that includes the employee name matched with the name of their boss. If they don't have a boss still include them in the output. Order output on employee name alphabetically. */
+
+SELECT b1.employee_name, b2.employee_name boss_name
+  FROM boss b1
+  LEFT JOIN boss b2
+  ON b1.boss_id = b2.employee_id
+  ORDER BY b1.employee_name ASC;
+
+
+
+
+/* Write a query to identify the customer who had the largest number of orders. Return the Customer_ID and number of orders, but if 2 customers had the same amount of orders, return them both. */
+
+SELECT customer_id, number_of_orders
+  FROM orders
+  HAVING number_of_orders = (SELECT max(number_of_orders) FROM orders);
