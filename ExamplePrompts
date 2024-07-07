@@ -102,3 +102,20 @@ SELECT email, count(email) count
 FROM emails
   GROUP BY email
   HAVING count(email) >=2;
+
+
+
+/* Write a query to find the highest grade with its corresponding course for each student. In case of a tie, you should find the course with the smallest course_id. Output the name, class_id, and grade for those classes. Order on the name alphabetically. */
+
+WITH ranktable AS
+  (select *, RANK () OVER (PARTITION BY student_name ORDER BY grade DESC, class_ID ASC) ranking
+  FROM highest_grade)
+
+  SELECT student_name, class_id, grade
+  FROM ranktable
+  WHERE ranking = 1
+  ORDER BY student_name ASC
+ ;
+
+
+
