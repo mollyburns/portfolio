@@ -119,3 +119,14 @@ WITH ranktable AS
 
 
 
+/* Write a query to determine how many direct reports each Manager has. Note: Managers will have "Manager" in their title. Report the Manager ID, Manager Title, and the number of direct reports in your output. */
+
+SELECT dr2.employee_id 'Manager ID', 
+  dr2.position 'Manager Title', 
+  count(dr1.employee_id) 'Direct Reports'
+  FROM direct_reports dr1
+  JOIN direct_reports dr2
+  ON dr1.managers_id = dr2.employee_id
+  WHERE dr2.position LIKE '%manager%'
+  GROUP BY dr2.employee_id, dr2.position
+;
