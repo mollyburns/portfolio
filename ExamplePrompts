@@ -130,3 +130,31 @@ SELECT dr2.employee_id 'Manager ID',
   WHERE dr2.position LIKE '%manager%'
   GROUP BY dr2.employee_id, dr2.position
 ;
+
+
+
+/* In a fictious world, individuals get taxed depending on how much their company pays their employees. The higher the total salary their companies pay, the less they are taxed. It's unfair, but that's life. Write a query to find the salaries of the employees after applying taxes. Round the salary to the nearest integer. The tax rate is calculated for each individual based on the following criteria:
+10% tax if the Sum of all salaries of a company is over 200k.
+25% tax if the Sum of all salaries of a company is between 100k -199k
+40% tax if the Sum of all salaries of a company is 99k or below. Include the company id, employee id, department, and the "taxed_salary". */
+
+SELECT company_id, employee_id, department, 
+  CASE
+    WHEN sum(salary) OVER (PARTITION BY company_id) >= 200000 THEN salary*0.9
+    WHEN (sum(salary) OVER (PARTITION BY company_id) >99000 AND sum(salary) OVER (PARTITION BY company_id) <200000) THEN salary*0.75
+    WHEN sum(salary) OVER (PARTITION BY company_id) <= 99000 THEN salary*0.6
+  END taxed_salary
+FROM taxes;
+
+
+
+/* Create a gamer tag for each player in the tournament. Select the first 3 characters of their first name and combine that with the year they were born. Your output should have their first name, last name, and gamer tag called "gamer_tag" Order output on gamertag in alphabetical order. */
+
+SELECT first_name, last_name, 
+  CONCAT(SUBSTRING(first_name, 1, 3), SUBSTRING(birth_date, 1,4)) gamer_tag
+  FROM gamer_tags
+  ORDER BY gamer_tag;
+
+
+
+
