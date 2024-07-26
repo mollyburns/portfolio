@@ -157,4 +157,9 @@ SELECT first_name, last_name,
 
 
 
+/* A property investment company has bought several properties over the past 10 years. They want to know about how much profit they will make on each if they were to liquidate all of their assets. They also want a running total of their profits starting with the cheapest property they purchased Write a query which gives the property ID, profit/loss from each property, and running total of profit/loss. Order the output on the cheapest to most expensive property they purchased. */
 
+SELECT property_id, (estimated_sale_price-purchase_price) 'estimated_profit/loss',
+  SUM(estimated_sale_price-purchase_price) OVER (order by purchase_price) running_total
+  FROM investment_property
+  ORDER BY purchase_price ASC;
